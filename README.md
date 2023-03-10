@@ -118,7 +118,7 @@ $i18n = new \Delight\I18n\I18n([
     \Delight\I18n\Codes::ES_AR,
     \Delight\I18n\Codes::KO,
     \Delight\I18n\Codes::KO_KR,
-    \Delight\I18n\Codes::RU_RU,
+    \Delight\I18n\Codes::UK_UA,
     \Delight\I18n\Codes::SW
 ]);
 ```
