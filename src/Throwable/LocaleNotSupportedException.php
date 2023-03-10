@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n\Throwable;
+namespace Pinga\Locale\Throwable;
 
 /** Exception that is thrown when a locale has been requested that is not supported */
 class LocaleNotSupportedException extends Exception {}
