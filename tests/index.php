@@ -59,7 +59,7 @@ $i18n = new \Pinga\Locale\I18n([
 	\Pinga\Locale\Codes::KO_KR,
 	\Pinga\Locale\Codes::KO,
 	\Pinga\Locale\Codes::SW,
-	\Pinga\Locale\Codes::RU_RU
+	\Pinga\Locale\Codes::UK_UA
 ]);
 ($i18n instanceof \Pinga\Locale\I18n) or \fail(__LINE__);
 
