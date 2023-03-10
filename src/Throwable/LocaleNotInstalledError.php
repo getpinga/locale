@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n\Throwable;
+namespace Pinga\Locale\Throwable;
 
 /** Error that is thrown when an attempt has been made to use a locale that is not known to the operating system */
 class LocaleNotInstalledError extends Error {}
