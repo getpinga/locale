@@ -6,13 +6,13 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n;
+namespace Pinga\Locale;
 
-use Delight\I18n\Throwable\EmptyLocaleListError;
-use Delight\I18n\Throwable\FormattingError;
-use Delight\I18n\Throwable\LocaleNotInstalledError;
-use Delight\I18n\Throwable\LocaleNotSupportedException;
-use Delight\I18n\Throwable\PathNotFoundError;
+use Pinga\Locale\Throwable\EmptyLocaleListError;
+use Pinga\Locale\Throwable\FormattingError;
+use Pinga\Locale\Throwable\LocaleNotInstalledError;
+use Pinga\Locale\Throwable\LocaleNotSupportedException;
+use Pinga\Locale\Throwable\PathNotFoundError;
 
 /** Internationalization and localization */
 final class I18n {
