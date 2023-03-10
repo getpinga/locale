@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n\Throwable;
+namespace Pinga\Locale\Throwable;
 
 /** Error that is thrown when a format string and the designated replacements do not match */
 class FormattingError extends Error {}
