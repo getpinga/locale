@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n\Throwable;
+namespace Pinga\Locale\Throwable;
 
 /** Base class for all (unchecked) errors */
 abstract class Error extends \Exception {}
