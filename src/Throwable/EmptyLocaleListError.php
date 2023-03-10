@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n\Throwable;
+namespace Pinga\Locale\Throwable;
 
 /** Error that is thrown when no supported locales have been specified */
 class EmptyLocaleListError extends Error {}
