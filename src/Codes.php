@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n;
+namespace Pinga\Locale;
 
 /** Locale codes as per a subset of IETF BCP 47 (RFC 5646) or Unicode CLDR */
 final class Codes {
