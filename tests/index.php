@@ -43,32 +43,32 @@ function _m($text) { global $i18n; return $i18n->markForTranslation($text); }
 // BEGIN TESTS
 
 try {
-	$i18n = new \Delight\I18n\I18n([]);
+	$i18n = new \Pinga\Locale\I18n([]);
 }
-catch (\Delight\I18n\Throwable\EmptyLocaleListError $e) {
+catch (\Pinga\Locale\Throwable\EmptyLocaleListError $e) {
 	$i18n = null;
 }
 ($i18n === null) or \fail(__LINE__);
 
 
-$i18n = new \Delight\I18n\I18n([
-	\Delight\I18n\Codes::EN_US,
-	\Delight\I18n\Codes::DA_DK,
-	\Delight\I18n\Codes::ES_AR,
-	\Delight\I18n\Codes::ES,
-	\Delight\I18n\Codes::KO_KR,
-	\Delight\I18n\Codes::KO,
-	\Delight\I18n\Codes::SW,
-	\Delight\I18n\Codes::RU_RU
+$i18n = new \Pinga\Locale\I18n([
+	\Pinga\Locale\Codes::EN_US,
+	\Pinga\Locale\Codes::DA_DK,
+	\Pinga\Locale\Codes::ES_AR,
+	\Pinga\Locale\Codes::ES,
+	\Pinga\Locale\Codes::KO_KR,
+	\Pinga\Locale\Codes::KO,
+	\Pinga\Locale\Codes::SW,
+	\Pinga\Locale\Codes::RU_RU
 ]);
-($i18n instanceof \Delight\I18n\I18n) or \fail(__LINE__);
+($i18n instanceof \Pinga\Locale\I18n) or \fail(__LINE__);
 
 
 try {
 	$i18n->setDirectory(__DIR__ . '/../language');
 	$invalidPath = false;
 }
-catch (\Delight\I18n\Throwable\PathNotFoundError $e) {
+catch (\Pinga\Locale\Throwable\PathNotFoundError $e) {
 	$invalidPath = true;
 }
 ($invalidPath === true) or \fail(__LINE__);
@@ -110,7 +110,7 @@ try {
 	$i18n->setLocaleManually('eS_Mx');
 	$invalidLocale = false;
 }
-catch (\Delight\I18n\Throwable\LocaleNotSupportedException $e) {
+catch (\Pinga\Locale\Throwable\LocaleNotSupportedException $e) {
 	$invalidLocale = true;
 }
 ($invalidLocale === true) or \fail(__LINE__);
@@ -121,16 +121,16 @@ try {
 	$i18n->setLocaleManually('eS_Ar');
 	$invalidLocale = false;
 }
-catch (\Delight\I18n\Throwable\LocaleNotSupportedException $e) {
+catch (\Pinga\Locale\Throwable\LocaleNotSupportedException $e) {
 	$invalidLocale = true;
 }
 ($invalidLocale === false) or \fail(__LINE__);
-($i18n->getLocale() === \Delight\I18n\Codes::ES_AR) or \fail(__LINE__);
+($i18n->getLocale() === \Pinga\Locale\Codes::ES_AR) or \fail(__LINE__);
 
 
 $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'pt-BR, pt;q=0.8, en;q=0.4, jp;q=0.6, *;q=0.2';
 $i18n->setLocaleAutomatically();
-($i18n->getLocale() === \Delight\I18n\Codes::EN_US) or \fail(__LINE__);
+($i18n->getLocale() === \Pinga\Locale\Codes::EN_US) or \fail(__LINE__);
 
 
 echo 'Locale:' . "\t\t\t" . $i18n->getLocale() . "\n";
@@ -188,7 +188,7 @@ try {
 	_f('Hello %s!');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === true) or \fail(__LINE__);
@@ -198,7 +198,7 @@ try {
 	_f('Hello %s!', 'Jane');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === false) or \fail(__LINE__);
@@ -208,7 +208,7 @@ try {
 	_f('Hello %s!', 'Jane', 'John');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === false) or \fail(__LINE__);
@@ -218,7 +218,7 @@ try {
 	_fe('Hello {0}!');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === false) or \fail(__LINE__);
@@ -228,7 +228,7 @@ try {
 	_fe('Hello {0}!', 'Jane');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === false) or \fail(__LINE__);
@@ -238,7 +238,7 @@ try {
 	_fe('Hello {0}!', 'Jane', 'John');
 	$formattingError = false;
 }
-catch (\Delight\I18n\Throwable\FormattingError $e) {
+catch (\Pinga\Locale\Throwable\FormattingError $e) {
 	$formattingError = true;
 }
 ($formattingError === false) or \fail(__LINE__);
@@ -303,506 +303,506 @@ $text = 'Administrator';
 ($i18n->getNativeLanguageName('fr-BE') === 'français') or \fail(__LINE__);
 
 
-(\Delight\I18n\Locale::toName('nb-NO') === 'Norwegian Bokmål (Norway)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toName('ru-UA') === 'Russian (Ukraine)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeName('nb-NO') === 'norsk bokmål (Norge)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeName('ru-UA') === 'русский (Украина)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishName('nb-NO') === 'Norwegian Bokmål (Norway)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishName('ru-UA') === 'Russian (Ukraine)') or \fail(__LINE__);
-(\Delight\I18n\Locale::toLanguageName('nb-NO') === 'Norwegian Bokmål') or \fail(__LINE__);
-(\Delight\I18n\Locale::toLanguageName('ru-UA') === 'Russian') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeLanguageName('nb-NO') === 'norsk bokmål') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeLanguageName('ru-UA') === 'русский') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishLanguageName('nb-NO') === 'Norwegian Bokmål') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishLanguageName('ru-UA') === 'Russian') or \fail(__LINE__);
-(\Delight\I18n\Locale::toScriptName('nb-Latn-NO') === 'Latin') or \fail(__LINE__);
-(\Delight\I18n\Locale::toScriptName('ru-Cyrl-UA') === 'Cyrillic') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeScriptName('nb-Latn-NO') === 'latinsk') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeScriptName('ru-Cyrl-UA') === 'кириллица') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishScriptName('nb-Latn-NO') === 'Latin') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishScriptName('ru-Cyrl-UA') === 'Cyrillic') or \fail(__LINE__);
-(\Delight\I18n\Locale::toRegionName('nb-NO') === 'Norway') or \fail(__LINE__);
-(\Delight\I18n\Locale::toRegionName('ru-UA') === 'Ukraine') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeRegionName('nb-NO') === 'Norge') or \fail(__LINE__);
-(\Delight\I18n\Locale::toNativeRegionName('ru-UA') === 'Украина') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishRegionName('nb-NO') === 'Norway') or \fail(__LINE__);
-(\Delight\I18n\Locale::toEnglishRegionName('ru-UA') === 'Ukraine') or \fail(__LINE__);
-(\Delight\I18n\Locale::toLanguageCode('nb-Latn-NO') === 'nb') or \fail(__LINE__);
-(\Delight\I18n\Locale::toLanguageCode('ru-Cyrl-UA') === 'ru') or \fail(__LINE__);
-(\Delight\I18n\Locale::toScriptCode('nb-Latn-NO') === 'Latn') or \fail(__LINE__);
-(\Delight\I18n\Locale::toScriptCode('ru-Cyrl-UA') === 'Cyrl') or \fail(__LINE__);
-(\Delight\I18n\Locale::toRegionCode('nb-Latn-NO') === 'NO') or \fail(__LINE__);
-(\Delight\I18n\Locale::toRegionCode('ru-Cyrl-UA') === 'UA') or \fail(__LINE__);
-(\Delight\I18n\Locale::isRtl('ln-CD') === false) or \fail(__LINE__);
-(\Delight\I18n\Locale::isRtl('ur-PK') === true) or \fail(__LINE__);
-(\Delight\I18n\Locale::isLtr('ln-CD') === true) or \fail(__LINE__);
-(\Delight\I18n\Locale::isLtr('ur-PK') === false) or \fail(__LINE__);
+(\Pinga\Locale\Locale::toName('nb-NO') === 'Norwegian Bokmål (Norway)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toName('ru-UA') === 'Russian (Ukraine)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeName('nb-NO') === 'norsk bokmål (Norge)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeName('ru-UA') === 'русский (Украина)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishName('nb-NO') === 'Norwegian Bokmål (Norway)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishName('ru-UA') === 'Russian (Ukraine)') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toLanguageName('nb-NO') === 'Norwegian Bokmål') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toLanguageName('ru-UA') === 'Russian') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeLanguageName('nb-NO') === 'norsk bokmål') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeLanguageName('ru-UA') === 'русский') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishLanguageName('nb-NO') === 'Norwegian Bokmål') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishLanguageName('ru-UA') === 'Russian') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toScriptName('nb-Latn-NO') === 'Latin') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toScriptName('ru-Cyrl-UA') === 'Cyrillic') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeScriptName('nb-Latn-NO') === 'latinsk') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeScriptName('ru-Cyrl-UA') === 'кириллица') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishScriptName('nb-Latn-NO') === 'Latin') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishScriptName('ru-Cyrl-UA') === 'Cyrillic') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toRegionName('nb-NO') === 'Norway') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toRegionName('ru-UA') === 'Ukraine') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeRegionName('nb-NO') === 'Norge') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toNativeRegionName('ru-UA') === 'Украина') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishRegionName('nb-NO') === 'Norway') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toEnglishRegionName('ru-UA') === 'Ukraine') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toLanguageCode('nb-Latn-NO') === 'nb') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toLanguageCode('ru-Cyrl-UA') === 'ru') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toScriptCode('nb-Latn-NO') === 'Latn') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toScriptCode('ru-Cyrl-UA') === 'Cyrl') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toRegionCode('nb-Latn-NO') === 'NO') or \fail(__LINE__);
+(\Pinga\Locale\Locale::toRegionCode('ru-Cyrl-UA') === 'UA') or \fail(__LINE__);
+(\Pinga\Locale\Locale::isRtl('ln-CD') === false) or \fail(__LINE__);
+(\Pinga\Locale\Locale::isRtl('ur-PK') === true) or \fail(__LINE__);
+(\Pinga\Locale\Locale::isLtr('ln-CD') === true) or \fail(__LINE__);
+(\Pinga\Locale\Locale::isLtr('ur-PK') === false) or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::parseClientLanguage('hello') == [ null, null, null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am') === [ 'am', null, null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('amha') === [ null, null, null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-ET') === [ 'am', null, 'ET' ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-ETH') === [ null, null, null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-Ethi') === [ 'am', 'Ethi', null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-Ethio') === [ null, null, null ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-Ethi-ET') === [ 'am', 'Ethi', 'ET' ]) or \fail(__LINE__);
-(\Delight\I18n\Http::parseClientLanguage('am-Ethio-ET') === [ null, null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('hello') == [ null, null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am') === [ 'am', null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('amha') === [ null, null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-ET') === [ 'am', null, 'ET' ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-ETH') === [ null, null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-Ethi') === [ 'am', 'Ethi', null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-Ethio') === [ null, null, null ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-Ethi-ET') === [ 'am', 'Ethi', 'ET' ]) or \fail(__LINE__);
+(\Pinga\Locale\Http::parseClientLanguage('am-Ethio-ET') === [ null, null, null ]) or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
-	\Delight\I18n\Leniency::NONE,
+	\Pinga\Locale\Leniency::NONE,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
-	\Delight\I18n\Leniency::VERY_LOW,
+	\Pinga\Locale\Leniency::VERY_LOW,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
-	\Delight\I18n\Leniency::MODERATE,
+	\Pinga\Locale\Leniency::MODERATE,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
 	null,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
-	\Delight\I18n\Leniency::VERY_HIGH,
+	\Pinga\Locale\Leniency::VERY_HIGH,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de-DE', 'de' ],
-	\Delight\I18n\Leniency::FULL,
+	\Pinga\Locale\Leniency::FULL,
 	'de-DE'
 ) === 'de-DE') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
-	\Delight\I18n\Leniency::NONE,
+	\Pinga\Locale\Leniency::NONE,
 	'de-DE'
 ) === null) or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
-	\Delight\I18n\Leniency::VERY_LOW,
+	\Pinga\Locale\Leniency::VERY_LOW,
 	'de-DE'
 ) === 'de') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
-	\Delight\I18n\Leniency::MODERATE,
+	\Pinga\Locale\Leniency::MODERATE,
 	'de-DE'
 ) === 'de') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
 	null,
 	'de-DE'
 ) === 'de') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
-	\Delight\I18n\Leniency::VERY_HIGH,
+	\Pinga\Locale\Leniency::VERY_HIGH,
 	'de-DE'
 ) === 'de') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-Latn-CH', 'de-CH', 'de-Latn-DE', 'de' ],
-	\Delight\I18n\Leniency::FULL,
+	\Pinga\Locale\Leniency::FULL,
 	'de-DE'
 ) === 'de') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::NONE,
+	\Pinga\Locale\Leniency::NONE,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::VERY_LOW,
+	\Pinga\Locale\Leniency::VERY_LOW,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::MODERATE,
+	\Pinga\Locale\Leniency::MODERATE,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
 	null,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::VERY_HIGH,
+	\Pinga\Locale\Leniency::VERY_HIGH,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::FULL,
+	\Pinga\Locale\Leniency::FULL,
 	'de-Latn-CH, de-CH;q=0.8, de-Latn-DE;q=0.6, de-DE;q=0.4, de;q=0.2'
 ) === 'de-DE') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::NONE,
+	\Pinga\Locale\Leniency::NONE,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === null) or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::VERY_LOW,
+	\Pinga\Locale\Leniency::VERY_LOW,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === null) or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::MODERATE,
+	\Pinga\Locale\Leniency::MODERATE,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
 	null,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::VERY_HIGH,
+	\Pinga\Locale\Leniency::VERY_HIGH,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === 'de-DE') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'de-DE' ],
-	\Delight\I18n\Leniency::FULL,
+	\Pinga\Locale\Leniency::FULL,
 	'de-Latn-CH, de-Latn-DE;q=0.5'
 ) === 'de-DE') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR, ES-AR;q=0.5, SW;q=0.5, EN;q=0.5, ES;q=0.5, KO;q=0.5, RU-RU;q=0.5, DA-DK;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR, eS-Ar;q=0.5, sw;q=0.5, eN;q=0.5, Es;q=0.5, KO;q=0.5, RU-ru;q=0.5, Da-dK;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr, es-ar;q=0.5, sw;q=0.5, en;q=0.5, es;q=0.5, ko;q=0.5, ru-ru;q=0.5, da-dk;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR,ES-AR;q=0.5,SW;q=0.5,EN;q=0.5,ES;q=0.5,KO;q=0.5,RU-RU;q=0.5,DA-DK;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR,eS-Ar;q=0.5,sw;q=0.5,eN;q=0.5,Es;q=0.5,KO;q=0.5,RU-ru;q=0.5,Da-dK;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr,es-ar;q=0.5,sw;q=0.5,en;q=0.5,es;q=0.5,ko;q=0.5,ru-ru;q=0.5,da-dk;q=0.5'
 ) === 'ko-KR') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5, ES-AR;q=0.5, SW, EN;q=0.5, ES;q=0.5, KO;q=0.5, RU-RU;q=0.5, DA-DK;q=0.5'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5, eS-Ar;q=0.5, sw, eN;q=0.5, Es;q=0.5, KO;q=0.5, RU-ru;q=0.5, Da-dK;q=0.5'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5, es-ar;q=0.5, sw, en;q=0.5, es;q=0.5, ko;q=0.5, ru-ru;q=0.5, da-dk;q=0.5'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5,ES-AR;q=0.5,SW,EN;q=0.5,ES;q=0.5,KO;q=0.5,RU-RU;q=0.5,DA-DK;q=0.5'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5,eS-Ar;q=0.5,sw,eN;q=0.5,Es;q=0.5,KO;q=0.5,RU-ru;q=0.5,Da-dK;q=0.5'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5,es-ar;q=0.5,sw,en;q=0.5,es;q=0.5,ko;q=0.5,ru-ru;q=0.5,da-dk;q=0.5'
 ) === 'sw') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5, ES-AR;q=0.5, SW;q=0.5, EN;q=0.5, ES;q=0.5, KO;q=0.5, RU-RU, DA-DK;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5, eS-Ar;q=0.5, sw;q=0.5, eN;q=0.5, Es;q=0.5, KO;q=0.5, RU-ru, Da-dK;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5, es-ar;q=0.5, sw;q=0.5, en;q=0.5, es;q=0.5, ko;q=0.5, ru-ru, da-dk;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5,ES-AR;q=0.5,SW;q=0.5,EN;q=0.5,ES;q=0.5,KO;q=0.5,RU-RU,DA-DK;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5,eS-Ar;q=0.5,sw;q=0.5,eN;q=0.5,Es;q=0.5,KO;q=0.5,RU-ru,Da-dK;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5,es-ar;q=0.5,sw;q=0.5,en;q=0.5,es;q=0.5,ko;q=0.5,ru-ru,da-dk;q=0.5'
 ) === 'RU-ru') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5, ES-AR;q=0.75, SW;q=0.5, EN;q=0.5, ES;q=0.5, KO;q=0.5, RU-RU;q=0.5, DA-DK;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5, eS-Ar;q=0.75, sw;q=0.5, eN;q=0.5, Es;q=0.5, KO;q=0.5, RU-ru;q=0.5, Da-dK;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5, es-ar;q=0.75, sw;q=0.5, en;q=0.5, es;q=0.5, ko;q=0.5, ru-ru;q=0.5, da-dk;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'KO-KR;q=0.5,ES-AR;q=0.75,SW;q=0.5,EN;q=0.5,ES;q=0.5,KO;q=0.5,RU-RU;q=0.5,DA-DK;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.5,eS-Ar;q=0.75,sw;q=0.5,eN;q=0.5,Es;q=0.5,KO;q=0.5,RU-ru;q=0.5,Da-dK;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-kr;q=0.5,es-ar;q=0.75,sw;q=0.5,en;q=0.5,es;q=0.5,ko;q=0.5,ru-ru;q=0.5,da-dk;q=0.5'
 ) === 'eS-Ar') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko;q=0.4'
 ) === 'KO') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-KR;q=0.4'
 ) === 'ko-KR') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ko-Hang-KR;q=0.4'
 ) === 'ko-KR') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es;q=0.4'
 ) === 'Es') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es-AR;q=0.4'
 ) === 'eS-Ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es-Latn-AR;q=0.4'
 ) === 'eS-Ar') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'sw;q=0.4'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'sw-KE;q=0.4'
 ) === 'sw') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'sw-Latn-KE;q=0.4'
 ) === 'sw') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'en;q=0.4'
 ) === 'eN') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'en-GB;q=0.4'
 ) === 'eN') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'en-Latn-GB;q=0.4'
 ) === 'eN') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es;q=0.4'
 ) === 'Es') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es-419;q=0.4'
 ) === 'Es') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'es-Latn-419;q=0.4'
 ) === 'Es') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ru;q=0.4'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ru-RU;q=0.4'
 ) === 'RU-ru') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'ru-Cyrl-RU;q=0.4'
 ) === 'RU-ru') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'da;q=0.4'
 ) === 'Da-dK') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'da-DK;q=0.4'
 ) === 'Da-dK') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'da-Latn-DK;q=0.4'
 ) === 'Da-dK') or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'eN', 'Da-dK', 'eS-Ar', 'Es', 'ko-KR', 'KO', 'sw', 'RU-ru' ],
 	null,
 	'fr-CA'
 ) === null) or \fail(__LINE__);
 
 
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar', 'en' ],
 	null,
 	'ar'
 ) === 'ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar', 'en' ],
 	null,
 	'ar-Arab, en-AU'
 ) === 'ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar', 'en' ],
 	null,
 	'ar-Latn, en-AU'
 ) === 'ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar', 'en' ],
 	null,
 	'ar-Arab-EG, en-AU'
 ) === 'ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar', 'en' ],
 	null,
 	'ar-Latn-EG, en-AU'
 ) === 'ar') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab', 'en' ],
 	null,
 	'ar'
 ) === 'ar-Arab') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab', 'en' ],
 	null,
 	'ar-Arab, en-AU'
 ) === 'ar-Arab') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab', 'en' ],
 	null,
 	'ar-Latn, en-AU'
 ) === 'en') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab', 'en' ],
 	null,
 	'ar-Arab-EG, en-AU'
 ) === 'ar-Arab') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab', 'en' ],
 	null,
 	'ar-Latn-EG, en-AU'
 ) === 'en') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab-EG', 'en' ],
 	null,
 	'ar'
 ) === 'ar-Arab-EG') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab-EG', 'en' ],
 	null,
 	'ar-Arab, en-AU'
 ) === 'ar-Arab-EG') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab-EG', 'en' ],
 	null,
 	'ar-Latn, en-AU'
 ) === 'en') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab-EG', 'en' ],
 	null,
 	'ar-Arab-EG, en-AU'
 ) === 'ar-Arab-EG') or \fail(__LINE__);
-(\Delight\I18n\Http::matchClientLanguages(
+(\Pinga\Locale\Http::matchClientLanguages(
 	[ 'ar-Arab-EG', 'en' ],
 	null,
 	'ar-Latn-EG, en-AU'
