@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n;
+namespace Pinga\Locale;
 
 /** Degree of resemblance between two locales */
 final class Affinity {
