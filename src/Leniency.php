@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n;
+namespace Pinga\Locale;
 
 /** Leniency for lookups and comparisons of locales */
 final class Leniency {
