@@ -6,7 +6,7 @@
  * Licensed under the MIT License (https://opensource.org/licenses/MIT)
  */
 
-namespace Delight\I18n;
+namespace Pinga\Locale;
 
 /** Handles aspects of the HTTP protocol related to locales */
 final class Http {
